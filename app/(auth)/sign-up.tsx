@@ -8,6 +8,7 @@ import { icons, images } from '@/constants';
 import CustomButton from '@/components/CustomButton';
 import InputField from '@/components/InputField';
 import OAuth from '@/components/OAuth';
+import { fetchAPI } from '@/lib/fetch';
 
 export default function SignUp() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -58,6 +59,14 @@ export default function SignUp() {
       // If verification was completed, set the session to active
       // and redirect the user
       if (signUpAttempt.status === 'complete') {
+        await fetchAPI('/(api)/user', {
+          method: 'POST',
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: signUpAttempt.createdSessionId,
+          }),
+        })
         await setActive({ session: signUpAttempt.createdSessionId })
         router.replace('/')
       } else {

@@ -45,7 +45,7 @@ const CustomButton = ({
     return (
         // change from TouchableOpacity to Pressable
         // to avoid the warning: "Warning: Failed prop type: Invalid prop `style` of type `array` supplied to `Pressable`, expected `object`."
-        <Pressable
+        <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1, margin: 2 }, { padding: 2 }]}
             onPress={onPress}
             className={`w-full rounded-full p-3 flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 active:opacity-70 ${getBgVariantStyle(bgVariant)} ${className}`}
             {...props}

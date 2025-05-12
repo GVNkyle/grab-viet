@@ -26,7 +26,8 @@ const InputField = ({
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-            <Pressable onPress={Keyboard.dismiss}>
+            <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1, margin: 2 }, { padding: 2 }]}
+                onPress={Keyboard.dismiss}>
                 <View className="my-2 w-full">
                     <Text className={`text-lg font-JakartaSemiBold mb-3 ${labelStyle}`}>
                         {label}
@@ -40,7 +41,7 @@ const InputField = ({
                         <TextInput
                             className={`rounded-full p-4 font-JakartaSemiBold text-[15px] flex-1 ${inputStyle} text-left`}
                             secureTextEntry={secureTextEntry}
-                            focusable
+                            autoFocus={true}
                             {...props}
                         />
                     </View>
